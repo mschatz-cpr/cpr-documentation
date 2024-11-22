@@ -74,3 +74,41 @@ The `image_height` and `image_width` parameters define the area of the raw image
 To reduce the size of the image using downsampling, use the `binning_x` and `binning_y` parameters. These parameters define the number of pixels that will be binned together in each axis. If both `binning_x` and `binning_y` are set to `2`, then the resolution of the image will be quartered.
 
 Reducing the resolution of the image improves the performance of the camera driver and network transit of image packets.
+
+#### Image Compression
+By default, the camera feed is also available in compressed formats including `compressed` (JPEG) and `ffmpeg` (H.264). Each of these topics is made available by an image transport plugin. Which plugins are active can be controlled by adding the following ROS parameters to the Blackfly section of the `robot.yaml`:
+
+```yaml
+    ros_parameters:
+      flir_blackfly:
+        serial_number: ''
+      image_debayer:
+        image_mono:
+          enable_pub_plugins:
+            - image_transport/compressed
+            - image_transport/ffmpeg
+            - image_transport/raw
+        image_color:
+          enable_pub_plugins:
+            - image_transport/compressed
+            - image_transport/ffmpeg
+            - image_transport/raw
+```
+
+#### FFMPEG Compression Settings
+To modify the FFMPEG compression settings, add the following ROS parameters to the Blackfly section of the `robot.yaml`:
+
+```yaml
+    ros_parameters:
+      flir_blackfly:
+        serial_number: ''
+      image_debayer:
+        ffmpeg_image_transport:
+          qmax: 40
+          preset: superfast
+          tune: zerolatency
+          bit_rate: 1000000
+          gop_size: 15
+```
+
+For documentation on these parameters see the [ffmpeg_image_transport GitHub repo](https://github.com/ros-misc-utilities/ffmpeg_image_transport).
