@@ -90,6 +90,7 @@ For a complete up-to-date description of FFMPEG Settings, see the [FFMPEG websit
 It is important to note that all of these settings interact with one another and will give different results in different combinations.
 
 #### Testing Process
+The FFMPEG settings being tested were configured in the `robot.yaml` on the robot computer as per the [Camera Configuration Examples](../config/yaml/sensors/cameras.mdx#ffmpeg-compression-settings). Since the `ffmpeg_image_transport` is supported by default, a separate encoder node was not required. On the offboard computer, an FFMPEG decoder node was launched as per the [FFMPEG Decoder Launch Instructions](../config/camera_compression.mdx#decode-ffmpeg) and RViz was used to visualize the decoded stream as per the [RViz Instructions](rviz.mdx#visualizing-camera-data)
 
 The testing process involved iteratively testing different setting combinations, but only making one change at a time to build an understanding of how each of the parameters interact. In order to determine the resultant size of the camera feed, it was important to move the camera around quickly to get the maximum change between frames and therefore get the full range of potential bandwidth requirements. This test is dependent on the compression method, and different compression methods may have different types of worst case scenarios. Fast movements were also made in the camera field of view to judge latency and how smooth the image was. Finally, CPU usage, GPU usage, and publishing frequency were all actively monitored.
 
