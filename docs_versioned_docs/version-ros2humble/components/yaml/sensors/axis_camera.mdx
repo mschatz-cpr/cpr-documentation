@@ -98,6 +98,8 @@ Pan and tilt limits can be specified in radians by using the `max_pan`, `min_pan
 
 Zoom range is expressed in zoon factors. For example, a camera with a 24x optical zoom should specify `min_zoom` as `1` and `max_zoom` as `24`.
 
+If the camera is a fixed-lens camera, set `ptz` to `False`. All PTZ and PTZ teleop parameters will be ignored if `ptz` is `False`.
+
 #### PTZ Teleop Configuration
 If `ptz_teleop` is `True` the `axis_camera` driver will subscribe to the robot's `joy` controller input, allowing the camera to be controlled via the game controller. The default parameters are configured for a Playstation 4/Dualshock family controller:
 - Right thumbstick controls pan & tilt (`axis_pan` and `axis_tilt`). The pitch axis may be inverted by setting `invert_tilt` to `True`
